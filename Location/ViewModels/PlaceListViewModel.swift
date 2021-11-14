@@ -38,13 +38,6 @@ class PlaceListViewModel: ViewModel {
         LocationService.shared.getCoordinate(place: name) { result in
             switch result {
             case .success(let coordinate):
-                
-                let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                LocationService.shared.getAddress(location: location) { result in
-                    
-                    
-                }
-                
                 completion(coordinate, true)
                 
             case .failure(let error):

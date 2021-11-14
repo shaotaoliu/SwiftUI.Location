@@ -6,20 +6,24 @@ class MyLocationManager: ViewModel, CLLocationManagerDelegate {
     @Published var region = MKCoordinateRegion()
     @Published var address: String = ""
     
+    var denied: Bool {
+        return errorMessage == Constants.Denied
+    }
+    
     private let locationManager: CLLocationManager = {
         let manager = CLLocationManager()
         
         // The minimum distance (in meters) the device must move horizontally before an update event is generated
-        manager.distanceFilter = 5.0
+        manager.distanceFilter = kCLDistanceFilterNone
         
         // The accuracy of the location data that your app wants to receive
         manager.desiredAccuracy = kCLLocationAccuracyBest
         
-        // Whether the app should receive location updates when suspended (The default is false)
-        manager.allowsBackgroundLocationUpdates = false
+        // Pause location updates when the location data is unlikeyly to change to improve battery life
+        manager.pausesLocationUpdatesAutomatically = true
         
-        // Whether the status bar changes its appearance when the app uses location services in the background (The default is false)
-        manager.showsBackgroundLocationIndicator = false
+        // The location manager is being used dspecifically during vehicular navigation
+        manager.activityType = .automotiveNavigation
         
         return manager
     }()
@@ -41,7 +45,7 @@ class MyLocationManager: ViewModel, CLLocationManagerDelegate {
             errorMessage = "The app is not authorized to use location services."
             
         case .denied:
-            errorMessage = "The app is denied to use location services."
+            errorMessage = Constants.Denied
             
         case .authorizedAlways, .authorizedWhenInUse:
             // Starts the generation of updates that report the user's current location
@@ -57,16 +61,18 @@ class MyLocationManager: ViewModel, CLLocationManagerDelegate {
     
     // Called when the location manager was unable to retrieve a location value
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if let error = error as? CLError {
-            if error.code == .denied {
-                manager.stopUpdatingLocation()
-            }
+        if let error = error as? CLError, error.code == .denied {
+            manager.stopUpdatingLocation()
+            errorMessage = Constants.Denied
+            return
         }
+        
+        errorMessage = error.localizedDescription
     }
     
     // Called when a new location data is available
-    // The most recent location update is at the end of the array.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // The most recent location update is at the end of the array.
         if let location = locations.last {
             region = MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: location.coordinate.latitude,
