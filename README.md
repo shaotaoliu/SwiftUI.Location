@@ -25,3 +25,8 @@ Tapping the "Show My Location >" button at the bottom of the main screen will sh
 To see the current location, the user needs to give permission to access Location Services.
 
 ![image](https://user-images.githubusercontent.com/15805568/141613890-1e189858-7474-4ff0-b5ab-bf93ec31b1f1.png)
+
+If permission is denied, it will show an alert:
+
+![image](https://user-images.githubusercontent.com/15805568/141672128-e0c78a67-eae5-488d-8cff-4aad0eb505f0.png)
+
