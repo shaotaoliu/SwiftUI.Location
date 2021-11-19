@@ -6,24 +6,24 @@ class LocationService {
     
     private init() {}
     
-    func getCoordinate(place: String, completion: @escaping (Result<CLLocationCoordinate2D, AppError>) -> Void) {
+    func getCoordinate(place: String, completion: @escaping (Result<CLLocationCoordinate2D, LocationError>) -> Void) {
         CLGeocoder().geocodeAddressString(place) { placemarks, error in
             if let error = error as? CLError {
                 switch error.code {
                 case .locationUnknown, .geocodeFoundNoResult, .geocodeFoundPartialResult:
-                    completion(.failure(AppError(errorMessage: "Unable to find the place: \(place)")))
+                    completion(.failure(.placeNotFound(place)))
                     
                 case .network:
-                    completion(.failure(AppError(errorMessage: "Network is unavailable")))
+                    completion(.failure(.networkFailure))
                     
                 default:
-                    completion(.failure(AppError(errorMessage: error.localizedDescription)))
+                    completion(.failure(.other(error)))
                 }
                 return
             }
             
             guard let coordinate = placemarks?.first?.location?.coordinate else {
-                completion(.failure(AppError(errorMessage: "Unable to find the place: \(place)")))
+                completion(.failure(.placeNotFound(place)))
                 return
             }
             
@@ -31,10 +31,10 @@ class LocationService {
         }
     }
     
-    func getAddress(location: CLLocation, completion: @escaping (Result<String, AppError>) -> Void) {
+    func getAddress(location: CLLocation, completion: @escaping (Result<String, LocationError>) -> Void) {
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             if let error = error as? CLError {
-                completion(.failure(AppError(errorMessage: error.localizedDescription)))
+                completion(.failure(.other(error)))
                 return
             }
             

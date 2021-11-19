@@ -5,3 +5,4 @@ struct IdentifiablePlace: Identifiable {
     let id = UUID()
     let location: CLLocationCoordinate2D
 }
+

@@ -6,7 +6,9 @@ class PlaceListViewModel: ViewModel {
     @Published var showAddSheet = false
     @Published var searchText = ""
     
-    override init() {
+    static let shared = PlaceListViewModel()
+    
+    override private init() {
         super.init()
         places = fetchFromUserDefaults()
     }
@@ -22,34 +24,31 @@ class PlaceListViewModel: ViewModel {
             .sorted { $0.name < $1.name }
     }
     
-    func validate(name: String, completion: @escaping (CLLocationCoordinate2D?, Bool) -> Void) {
+    func add(name: String, completion: @escaping (Bool) -> Void) {
         if name.isEmpty {
-            errorMessage = "Name cannot be empty"
-            completion(nil, false)
+            self.error = .nameIsEmpty
+            completion(false)
             return
         }
         
         if places.contains(where: { $0.name == name }) {
-            errorMessage = "\(name) already exists"
-            completion(nil, false)
+            self.error = .nameAlreadyExists(name)
+            completion(false)
             return
         }
         
         LocationService.shared.getCoordinate(place: name) { result in
             switch result {
             case .success(let coordinate):
-                completion(coordinate, true)
+                self.places.append(Place(name: name, coordinate: coordinate))
+                self.saveToUserDefaults()
+                completion(true)
                 
             case .failure(let error):
-                self.errorMessage = error.errorMessage
-                completion(nil, false)
+                self.error = error
+                completion(false)
             }
         }
-    }
-    
-    func add(name: String, coordinate: CLLocationCoordinate2D) {
-        places.append(Place(name: name, coordinate: coordinate))
-        saveToUserDefaults()
     }
     
     func remove(ids: [UUID]) {
@@ -67,19 +66,5 @@ class PlaceListViewModel: ViewModel {
             return try! JSONDecoder().decode([Place].self, from: data)
         }
         return []
-    }
-}
-
-struct Place: Codable {
-    let id: UUID
-    let name: String
-    let latitude: CLLocationDegrees
-    let longitude: CLLocationDegrees
-    
-    init(name: String, coordinate: CLLocationCoordinate2D) {
-        self.id = UUID()
-        self.name = name
-        self.latitude = coordinate.latitude
-        self.longitude = coordinate.longitude
     }
 }

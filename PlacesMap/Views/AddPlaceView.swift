@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddPlaceView: View {
-    @ObservedObject var vm: PlaceListViewModel
+    @StateObject var vm = PlaceListViewModel.shared
     @State var name: String = ""
     
     var body: some View {
@@ -31,9 +31,8 @@ struct AddPlaceView: View {
                 .cornerRadius(10)
                 
                 Button("Add") {
-                    vm.validate(name: name) { coordinate, success in
+                    vm.add(name: name) { success in
                         if success {
-                            vm.add(name: name, coordinate: coordinate!)
                             vm.showAddSheet = false
                         }
                     }
@@ -42,9 +41,9 @@ struct AddPlaceView: View {
                 .frame(width: 90, height: 36)
                 .background(.blue)
                 .cornerRadius(10)
-                .alert("Error", isPresented: $vm.hasError, presenting: vm.errorMessage, actions: { errorMessage in
-                }, message: { errorMessage in
-                    Text(errorMessage)
+                .alert("Error", isPresented: $vm.hasError, presenting: vm.error, actions: { error in
+                }, message: { error in
+                    Text(error.localizedDescription)
                 })
             }
             
@@ -55,6 +54,6 @@ struct AddPlaceView: View {
 
 struct AddPlaceView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPlaceView(vm: PlaceListViewModel())
+        AddPlaceView()
     }
 }

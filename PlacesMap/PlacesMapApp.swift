@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct LocationApp: App {
+struct PlacesMapApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

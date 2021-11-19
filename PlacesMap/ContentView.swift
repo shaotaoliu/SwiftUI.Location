@@ -2,7 +2,8 @@ import SwiftUI
 import CoreLocation
 
 struct ContentView: View {
-    @StateObject var vm = PlaceListViewModel()
+    @StateObject var vm = PlaceListViewModel.shared
+    @StateObject var manager = LocationManager.shared
     
     var body: some View {
         NavigationView {
@@ -29,8 +30,8 @@ struct ContentView: View {
                     AddPlaceView(vm: vm)
                 }
                 
-                if CLLocationManager.locationServicesEnabled() {
-                    NavigationLink(destination: MyLocationView()) {
+                if CLLocationManager.locationServicesEnabled() && manager.locationServiceEnabled {
+                    NavigationLink(destination: PlaceMapView(place: manager.place)) {
                         HStack {
                             Text("Show My Location")
                             Image(systemName: "chevron.forward")
@@ -38,6 +39,24 @@ struct ContentView: View {
                     }
                 }
             }
+            .onAppear(perform: {
+                manager.requestAuthorization()
+            })
+            .alert("Permission Denied", isPresented: $manager.hasError, presenting: manager.error, actions: { error in
+                if manager.needPermission {
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    }, label: {
+                        Text("Turn on in Settings")
+                    })
+                    
+                    Button("Keep Location Services Off") {
+                        
+                    }
+                }
+            }, message: { error in
+                Text(error.localizedDescription)
+            })
         }
     }
 }

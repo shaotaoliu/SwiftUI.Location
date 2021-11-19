@@ -2,9 +2,9 @@ import Foundation
 
 class ViewModel: NSObject, ObservableObject {
     @Published var hasError = false
-    @Published var errorMessage: String? = nil {
+    @Published var error: LocationError? = nil {
         didSet {
-            hasError = errorMessage != nil
+            hasError = error != nil
         }
     }
 }
