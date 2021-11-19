@@ -27,7 +27,7 @@ struct ContentView: View {
                 }))
                 .searchable(text: $vm.searchText)
                 .sheet(isPresented: $vm.showAddSheet) {
-                    AddPlaceView(vm: vm)
+                    PlaceAddView(vm: vm)
                 }
                 
                 if CLLocationManager.locationServicesEnabled() && manager.locationServiceEnabled {

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddPlaceView: View {
+struct PlaceAddView: View {
     @StateObject var vm = PlaceListViewModel.shared
     @State var name: String = ""
     
@@ -52,8 +52,8 @@ struct AddPlaceView: View {
     }
 }
 
-struct AddPlaceView_Previews: PreviewProvider {
+struct PlaceAddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPlaceView()
+        PlaceAddView()
     }
 }

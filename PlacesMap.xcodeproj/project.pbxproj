@@ -20,7 +20,7 @@
 		4ADE27D72747689100C8C076 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27D62747689100C8C076 /* Constants.swift */; };
 		4ADE27D92747699A00C8C076 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27D82747699A00C8C076 /* LocationManager.swift */; };
 		4ADE27DB274769C500C8C076 /* LocationManager.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27DA274769C500C8C076 /* LocationManager.extension.swift */; };
-		4ADE27DD27476A9D00C8C076 /* AddPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27DC27476A9D00C8C076 /* AddPlaceView.swift */; };
+		4ADE27DD27476A9D00C8C076 /* PlaceAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27DC27476A9D00C8C076 /* PlaceAddView.swift */; };
 		4ADE27DF2747794900C8C076 /* PlaceMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27DE2747794900C8C076 /* PlaceMapView.swift */; };
 		4ADE27E327479B7900C8C076 /* PlaceMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27E227479B7900C8C076 /* PlaceMapViewModel.swift */; };
 		4ADE27E72747A30100C8C076 /* PlaceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE27E62747A30100C8C076 /* PlaceSearchView.swift */; };
@@ -41,7 +41,7 @@
 		4ADE27D62747689100C8C076 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4ADE27D82747699A00C8C076 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4ADE27DA274769C500C8C076 /* LocationManager.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.extension.swift; sourceTree = "<group>"; };
-		4ADE27DC27476A9D00C8C076 /* AddPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceView.swift; sourceTree = "<group>"; };
+		4ADE27DC27476A9D00C8C076 /* PlaceAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddView.swift; sourceTree = "<group>"; };
 		4ADE27DE2747794900C8C076 /* PlaceMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMapView.swift; sourceTree = "<group>"; };
 		4ADE27E227479B7900C8C076 /* PlaceMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMapViewModel.swift; sourceTree = "<group>"; };
 		4ADE27E62747A30100C8C076 /* PlaceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchView.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			children = (
 				4ADE27DE2747794900C8C076 /* PlaceMapView.swift */,
 				4ADE27E62747A30100C8C076 /* PlaceSearchView.swift */,
-				4ADE27DC27476A9D00C8C076 /* AddPlaceView.swift */,
+				4ADE27DC27476A9D00C8C076 /* PlaceAddView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 				4ADE27D32747686200C8C076 /* LocationService.swift in Sources */,
 				4ADE27CB2746233B00C8C076 /* LocationError.swift in Sources */,
 				4ADE27DF2747794900C8C076 /* PlaceMapView.swift in Sources */,
-				4ADE27DD27476A9D00C8C076 /* AddPlaceView.swift in Sources */,
+				4ADE27DD27476A9D00C8C076 /* PlaceAddView.swift in Sources */,
 				4ADE27D92747699A00C8C076 /* LocationManager.swift in Sources */,
 				4ADE27BB2746227100C8C076 /* ContentView.swift in Sources */,
 				4ADE27B92746227100C8C076 /* PlacesMapApp.swift in Sources */,
