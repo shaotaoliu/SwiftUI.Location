@@ -1,16 +1,30 @@
 # SwiftUI.Location
 
-This app shows how to create maps and get user's current location.
+This app shows how to create maps and use user's current location.
 
-The main screen shows a list of places.
+When the app is launched, it shows the Location Services permission popup.
 
-![image](https://user-images.githubusercontent.com/15805568/141613659-6e8f69cc-9c04-4e30-8da4-3e87fb375955.png)
+![image](https://user-images.githubusercontent.com/15805568/142605181-145dd3f5-ed41-4e6c-bd65-f22ca6bc15d3.png)
 
-Tapping each place will show the map of that place.
+If the permission is deniedd, it shows the Permission Denied popup.
 
-![image](https://user-images.githubusercontent.com/15805568/141613703-46f22553-c92e-4ccd-9792-60b0ef024cf5.png)
+![image](https://user-images.githubusercontent.com/15805568/142605531-e863fcfc-070a-45ab-a01d-74e2130524ed.png)
 
-Tapping the + button to add a new place. It can be a complete address, a city, a zip code, a national park, a place name (such as Golden Gate Bridge), and so on.
+If the permission is allowed, the main screen shows a list of places. The places are stored in User Defaults.
+
+![image](https://user-images.githubusercontent.com/15805568/142605739-42746684-4a92-43e7-8d7c-1ddb2af3845e.png)
+
+Tapping a place in the list will show the map of that place.
+
+![image](https://user-images.githubusercontent.com/15805568/142605853-1d446b65-ab1a-4ed5-b178-c2abcadb8224.png)
+
+There is a Search bar at the top of the map. You can type a name to search for places.
+
+![image](https://user-images.githubusercontent.com/15805568/142606049-1fe31c0b-25e7-4256-a573-769118efd9b0.png)
+
+Maybe you notice the apple icon at the top-right corner. Tapping it will open the iPhone Map app (just for fun).
+
+Tapping the + button in the main screen to add a new place. It can be a complete address, a city, a zip code, a national park, a place name (such as Golden Gate Bridge), and so on.
 
 ![image](https://user-images.githubusercontent.com/15805568/141613776-1b40b3c1-3c42-4957-a95c-f10a4f1ae7cb.png)
 
@@ -20,13 +34,4 @@ If a place cannot be found, an error message will be shown.
 
 Tapping the "Show My Location >" button at the bottom of the main screen will show the user's current location.
 
-![image](https://user-images.githubusercontent.com/15805568/141613852-c53a4a24-f8cd-434b-bcc7-e1f5de9f41f3.png)
-
-To see the current location, the user needs to give permission to access Location Services.
-
-![image](https://user-images.githubusercontent.com/15805568/141613890-1e189858-7474-4ff0-b5ab-bf93ec31b1f1.png)
-
-If permission is denied, it will show an alert:
-
-![image](https://user-images.githubusercontent.com/15805568/141672128-e0c78a67-eae5-488d-8cff-4aad0eb505f0.png)
-
+![image](https://user-images.githubusercontent.com/15805568/142606498-e595305f-3ce8-481f-91cb-7ee3387f3e13.png)
